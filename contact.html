@@ -24,19 +24,21 @@
     <div class="contact-grid">
       <div class="form-container">
         <h2 class="section-subtitle">CONTACT FORM</h2>
-        <form id="contactForm" novalidate>
+        <form id="contactForm" action="https://formsubmit.co/itshepeleng03@gmail.com" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="New portfolio contact message" />
+          <input type="hidden" name="_template" value="table" />
           <div class="form-group">
-            <input type="text" id="fullName" placeholder="Full Name" required />
+            <input type="text" id="fullName" name="name" placeholder="Full Name" required />
             <span class="error-message" id="nameError"></span>
           </div>
 
           <div class="form-group">
-            <input type="email" id="email" placeholder="Email Address" required />
+            <input type="email" id="email" name="email" placeholder="Email Address" required />
             <span class="error-message" id="emailError"></span>
           </div>
 
           <div class="form-group">
-            <select id="projectType" required>
+            <select id="projectType" name="projectType" required>
               <option value="" disabled selected>Project Type</option>
               <option value="Mobile App">Mobile App</option>
               <option value="Web App">Web App</option>
@@ -47,11 +49,12 @@
           </div>
 
           <div class="form-group">
-            <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
+            <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
             <span class="error-message" id="messageError"></span>
           </div>
 
           <button type="submit" class="btn-primary">SEND</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
 
@@ -93,7 +96,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
   <script src="js/page-scroll.js"></script>
 </body>
 </html>

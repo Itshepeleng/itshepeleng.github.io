@@ -23,6 +23,17 @@
 
       <div class="projects-list" id="projectsList">
         </div>
+
+      <dialog class="project-choice-dialog" id="projectChoiceDialog" aria-labelledby="projectDialogTitle">
+        <button type="button" class="project-dialog-close" id="closeProjectDialog">Close</button>
+        <h2 id="projectDialogTitle">Choose a destination</h2>
+        <p id="projectDialogMessage"></p>
+        <div class="project-dialog-options">
+          <a class="project-dialog-option" id="projectGithubLink" href="" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+          <a class="project-dialog-option" id="projectLiveLink" href="" target="_blank" rel="noopener noreferrer" hidden>Live website</a>
+          <button class="project-dialog-option" id="projectLiveUnavailable" type="button" disabled>Live website unavailable</button>
+        </div>
+      </dialog>
     </section>
   </main>
 

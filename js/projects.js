@@ -4,21 +4,16 @@ const projectsData = [
     category: "Flutter & ASP.NET Core",
     description: "A cross-platform application enabling real-time communication between parents and school administration, featuring push notifications and role-based access control.",
     imageUrl: "", 
-    githubUrl: "https://github.com/your-username/parent-teacher-app"
-  },
-  {
-    title: "DanceArchive Management System",
-    category: "C# & Supabase",
-    description: "Digital archiving solution featuring real-time data sync, secure user authentication, and comprehensive database management.",
-    imageUrl: "",
-    githubUrl: "https://github.com/your-username/dance-archive"
+    githubUrl: "https://github.com/Itshepeleng/SKOOL-COMM",
+    liveUrl: ""
   },
   {
     title: "Study Room Web App",
     category: "HTML / CSS / JavaScript",
     description: "A dark-themed, minimal virtual workspace interface tailored for focused academic study and collaborative learning sessions.",
     imageUrl: "",
-    githubUrl: "https://github.com/your-username/study-room-web"
+    githubUrl: "https://github.com/Itshepeleng/study_stream",
+    liveUrl: ""
   }
 ];
 
@@ -26,7 +21,7 @@ function renderProjects() {
   const container = document.getElementById("projectsList");
   if (!container) return;
 
-  container.innerHTML = projectsData.map(project => {
+  container.innerHTML = projectsData.map((project, index) => {
     const hasImage = project.imageUrl && project.imageUrl.trim() !== "";
 
     return `
@@ -52,13 +47,39 @@ function renderProjects() {
             <p class="project-description">${project.description}</p>
           </div>
 
-          <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="take-a-look-btn">
+          <button type="button" class="take-a-look-btn" data-project-index="${index}">
             Take a look ➔
-          </a>
+          </button>
         </div>
       </article>
     `;
   }).join("");
+
+  const dialog = document.getElementById("projectChoiceDialog");
+  const dialogMessage = document.getElementById("projectDialogMessage");
+  const githubLink = document.getElementById("projectGithubLink");
+  const liveLink = document.getElementById("projectLiveLink");
+  const liveUnavailable = document.getElementById("projectLiveUnavailable");
+
+  container.addEventListener("click", event => {
+    const trigger = event.target.closest("[data-project-index]");
+    if (!trigger || !dialog) return;
+
+    const project = projectsData[Number(trigger.dataset.projectIndex)];
+    if (!project) return;
+
+    dialogMessage.textContent = `Choose where to go for ${project.title}.`;
+    githubLink.href = project.githubUrl;
+    liveLink.hidden = !project.liveUrl;
+    liveUnavailable.hidden = Boolean(project.liveUrl);
+    if (project.liveUrl) liveLink.href = project.liveUrl;
+    dialog.showModal();
+  });
+
+  document.getElementById("closeProjectDialog").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", event => {
+    if (event.target === dialog) dialog.close();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", renderProjects);

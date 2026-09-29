@@ -4,21 +4,14 @@ const projectsData = [
     category: "Flutter & ASP.NET Core",
     description: "A cross-platform application enabling real-time communication between parents and school administration, featuring push notifications and role-based access control.",
     imageUrl: "", 
-    githubUrl: "https://github.com/your-username/parent-teacher-app"
-  },
-  {
-    title: "DanceArchive Management System",
-    category: "C# & Supabase",
-    description: "Digital archiving solution featuring real-time data sync, secure user authentication, and comprehensive database management.",
-    imageUrl: "",
-    githubUrl: "https://github.com/your-username/dance-archive"
+    githubUrl: "https://github.com/Itshepeleng/SKOOL-COMM"
   },
   {
     title: "Study Room Web App",
     category: "HTML / CSS / JavaScript",
     description: "A dark-themed, minimal virtual workspace interface tailored for focused academic study and collaborative learning sessions.",
     imageUrl: "",
-    githubUrl: "https://github.com/your-username/study-room-web"
+    githubUrl: "https://github.com/Itshepeleng/study_stream"
   }
 ];
 
@@ -72,9 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const typeSelect = document.getElementById('projectType');
   const messageInput = document.getElementById('message');
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let isValid = true;
+    const statusMessage = document.getElementById('formStatus');
+    const submitButton = form.querySelector('button[type="submit"]');
+    statusMessage.textContent = '';
+    statusMessage.dataset.state = '';
 
     // Reset error messages
     document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
@@ -107,10 +104,31 @@ document.addEventListener('DOMContentLoaded', () => {
       isValid = false;
     }
 
-    // On Successful Submission
-    if (isValid) {
-      alert('Message sent successfully!');
+    if (!isValid) return;
+
+    submitButton.disabled = true;
+    statusMessage.textContent = 'Sending your message...';
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/itshepeleng03@gmail.com', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      const result = await response.json();
+
+      if (!response.ok || result.success !== 'true') {
+        throw new Error('The form service did not accept the message.');
+      }
+
       form.reset();
+      statusMessage.textContent = 'Your message was sent successfully.';
+      statusMessage.dataset.state = 'success';
+    } catch (error) {
+      statusMessage.textContent = 'We could not send your message. Please email itshepeleng03@gmail.com instead.';
+      statusMessage.dataset.state = 'error';
+    } finally {
+      submitButton.disabled = false;
     }
   });
 });
@@ -122,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const timelineItems = document.querySelectorAll('.timeline-item');
 
   const observerOptions = {
-    threshold: 0.25,
+    threshold: 0,
     rootMargin: "0px 0px -50px 0px"
   };
 

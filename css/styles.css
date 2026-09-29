@@ -123,6 +123,36 @@ body.is-page-leaving-backward {
   background-color: #f1c58c; /* Matches warm background behind profile pic */
 }
 
+.profile-links {
+  display: flex;
+  width: 380px;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.profile-github-link {
+  display: flex;
+}
+
+.profile-github-link img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.cv-download-link {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cv-download-link:hover {
+  text-decoration: underline;
+}
+
 .profile-img {
   width: 100%;
   height: 100%;
@@ -489,11 +519,85 @@ body.is-page-leaving-backward {
   letter-spacing: 0.5px;
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .take-a-look-btn:hover {
   background-color: var(--accent-blue, #38bdf8);
   color: #080b18;
+}
+
+.project-choice-dialog {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: min(420px, calc(100% - 32px));
+  padding: 28px;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.project-choice-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.68);
+}
+
+.project-dialog-close {
+  display: block;
+  margin: 0 0 20px auto;
+  padding: 6px 10px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.project-choice-dialog h2 {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.project-choice-dialog p {
+  margin-bottom: 20px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.project-dialog-options {
+  display: grid;
+  gap: 10px;
+}
+
+.project-dialog-option {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--accent-blue);
+  border-radius: 4px;
+  font: inherit;
+  text-align: center;
+  text-decoration: none;
+}
+
+.project-dialog-option:hover:not(:disabled) {
+  color: #080b18;
+  background: var(--accent-blue);
+}
+
+.project-dialog-option:disabled {
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+.project-dialog-option[hidden] {
+  display: none;
 }
 
 /* Mobile Responsive Adjustments */
@@ -628,6 +732,20 @@ input:focus, select:focus, textarea:focus {
   margin-top: 4px;
 }
 
+.form-status {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.form-status[data-state="success"] {
+  color: #22c55e;
+}
+
+.form-status[data-state="error"] {
+  color: #ef4444;
+}
+
 .btn-primary {
   width: 180px;
   padding: 14px;
@@ -641,6 +759,11 @@ input:focus, select:focus, textarea:focus {
 
 .btn-primary:hover {
   opacity: 0.9;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }
 
 /* Side Info Card */
