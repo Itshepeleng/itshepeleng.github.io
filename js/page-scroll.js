@@ -2,7 +2,7 @@
   const pages = ["index.html", "projects.html", "contact.html"];
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const currentIndex = pages.indexOf(currentPage === "Portfolio.html" ? "index.html" : currentPage);
-  const transitionDelay = 380;
+  const transitionDelay = 0; // Adjust this value to match the CSS transition duration (in milliseconds)
   let isNavigating = false;
   let touchStartY = 0;
 
