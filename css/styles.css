@@ -276,35 +276,25 @@ body.is-page-leaving-backward {
   line-height: 1.5;
 }
 
-/* Language Progress Bars */
-.progress-item {
-  margin-bottom: 24px;
+/* Language proficiency list */
+.language-list {
+  display: grid;
+  gap: 16px;
 }
 
-.progress-label {
+.language-item {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--card-border);
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
 }
 
-.progress-label span:last-child {
+.language-item dd {
   color: var(--accent-blue);
-}
-
-.progress-bar-bg {
-  width: 100%;
-  height: 6px;
-  background: var(--card-border);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: var(--accent-blue);
 }
 
 /*old projects page css*/
