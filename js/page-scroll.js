@@ -2,11 +2,22 @@
   const pages = ["index.html", "projects.html", "contact.html"];
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const currentIndex = pages.indexOf(currentPage === "Portfolio.html" ? "index.html" : currentPage);
-  const transitionDelay = 0; // Adjust this value to match the CSS transition duration (in milliseconds)
+  const transitionDelay = 560;
   let isNavigating = false;
   let touchStartY = 0;
 
   if (currentIndex === -1) return;
+
+  const pageEnterDirection = sessionStorage.getItem("portfolioPageEnter");
+  if (pageEnterDirection) {
+    document.body.classList.add(
+      pageEnterDirection === "forward" ? "is-page-entering-forward" : "is-page-entering-backward"
+    );
+    sessionStorage.removeItem("portfolioPageEnter");
+    window.setTimeout(() => {
+      document.body.classList.remove("is-page-entering-forward", "is-page-entering-backward");
+    }, 650);
+  }
 
   function navigate(direction) {
     if (isNavigating) return;
@@ -22,6 +33,7 @@
       return;
     }
 
+    sessionStorage.setItem("portfolioPageEnter", direction > 0 ? "forward" : "backward");
     document.body.classList.add(direction > 0 ? "is-page-leaving-forward" : "is-page-leaving-backward");
     window.setTimeout(() => {
       window.location.href = pages[nextIndex];
